@@ -14,7 +14,7 @@ const Grid = styled.div `
     }
 `;
 
-const CellPlaceholder = styled.button `
+const CellPlaceholder = styled.div `
     --size: ${props => props.size};
     --color: ${props => props.colorStatus ? 'DodgerBlue' : 'white'};
     background-color: var(--color);

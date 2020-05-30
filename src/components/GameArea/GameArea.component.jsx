@@ -27,6 +27,14 @@ function GameArea() {
 		emptyCellArray();
 	}, [gameConfigurations.gridSize]);
 
+	const updateCellStatus = (row, col) => {
+		if(!isGameActive) {
+			const tempArray = [...cellArray];
+			tempArray[row][col] = !tempArray[row][col];
+			setCellArray(tempArray);
+		}
+	};
+
 	return (
 		<Styles.Main>
 			<Styles.BarContainer>
@@ -36,7 +44,11 @@ function GameArea() {
 				<StartBar />
 			</Styles.BarContainer>
 
-			<Grid arrayOfElements={cellArray} gameConfigurations={gameConfigurations} />
+			<Grid 
+				arrayOfElements={cellArray}
+				gameConfigurations={gameConfigurations}
+				updateCellStatus={updateCellStatus}
+			/>
 			
 			<Styles.BarContainer>
 				<Styles.CounterText> 
