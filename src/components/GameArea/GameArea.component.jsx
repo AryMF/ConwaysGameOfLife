@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Styles from './GameArea.Style.jsx';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlay, faPause,  faTrashAlt, faStepForward} from '@fortawesome/free-solid-svg-icons';
+
+import { StartBar } from '../StartBar';
 
 function GameArea(params) {
 	const counter = 0;
@@ -11,7 +11,7 @@ function GameArea(params) {
 				<Styles.CounterText> 
                     generation: {counter}
 				</Styles.CounterText>
-				<Styles.StartBarPlaceHolder />
+				<StartBar />
 			</Styles.BarContainer>
 
 			<Styles.GridPlaceholder ></Styles.GridPlaceholder >
