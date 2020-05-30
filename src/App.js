@@ -1,7 +1,7 @@
 import React from 'react';
 import * as Styles from './styles';
 
-
+import {GameArea} from './components/GameArea';
 import Logo from './assets/LogoComplete.png';
 
 function App() {
@@ -11,7 +11,7 @@ function App() {
 			<header>
 				<Styles.imgLogo src={Logo} />
 			</header>
-			<main></main>
+			<GameArea />
 		</div>
 	);
 }
