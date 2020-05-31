@@ -17,7 +17,14 @@ function StartBar({buttonHandlers}) {
 			<Styles.StyledIcon icon={faStepForward} size="lg" onClick={stepF} />
 			<Styles.StyledIcon icon={faTrashAlt} size="lg" onClick={reset} />
 			<p> Speed </p>
-			<input type="range" min="1" max="10" value={speedValue} step="1" style={{ width: '60px'}} onChange={rangeHandler} />
+			<input 
+				type="range"
+				min="1"
+				max="20"
+				step="1"
+				value={speedValue}
+				style={{ width: '60px'}}
+				onChange={rangeHandler} />
 		</Styles.StartBar>
 	);
 }

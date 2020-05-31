@@ -69,7 +69,7 @@ function GameArea() {
 		if (isGameActive) {
 			interval = setInterval(() => {
 				gameStepCicle();
-			}, 1000);
+			}, 500 / gameConfigurations.speed);
 		} else if (!isGameActive) {
 			clearInterval(interval);
 		}
