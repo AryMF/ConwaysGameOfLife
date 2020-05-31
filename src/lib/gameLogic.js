@@ -9,12 +9,8 @@ const gameLogic = (actualStatusArray) => {
 			// su nuevo status en newStatusArray.
 			newStatusArray[i][j] = false;
 			if(actualStatusArray[i][j] && (neighboursAlive === 2 || neighboursAlive === 3)){
-				console.log('entro en 1');
-				console.log(`para la celda: ${actualStatusArray[i][j]} ${i},${j} neighboursAlive:${neighboursAlive}`);
 				newStatusArray[i][j] = true;
 			} else if(!actualStatusArray[i][j] && neighboursAlive === 3){
-				console.log('entro en 2');
-				console.log(`para la celda: ${actualStatusArray[i][j]} ${i},${j} neighboursAlive:${neighboursAlive}`);
 				newStatusArray[i][j] = true;
 			}
 		}
@@ -40,7 +36,6 @@ const checkCellNeighboursStatus = (actualArray, row, col) => {
 			for(let j=0; j < colArray.length; j++){
 				if(colArray[j] > -1 && !(row === rowArray[i] && col === colArray[j])){
 					if(actualArray[rowArray[i]][colArray[j]]){
-						console.log(`Vecino vivo en ${rowArray[i]},${colArray[j]}`);
 						liveNeighbours++;
 					}
 				}

@@ -20,6 +20,8 @@ function GameArea() {
 		const size = gameConfigurations.gridSize;
 		const auxArray = new Array(size).fill().map(()=>Array(size).fill(false));
 		setCellArray(auxArray);
+		setIsGameActive(false);
+		setGenerationCounter(0);
 	};
 
 	useEffect(() => {
@@ -55,11 +57,28 @@ function GameArea() {
 		console.log('** Pause');
 	};
 
-	const stepForward = () => {
-		console.log('** Stepforward');
+	const gameStepCicle = () => {
 		const actualStateArray = JSON.parse(JSON.stringify(cellArray));
 		const newStateArray = gameLogic(actualStateArray);
 		setCellArray(newStateArray);
+		setGenerationCounter(generationCounter => generationCounter + 1);
+	};
+
+	useEffect(() => {
+		let interval = null;
+		if (isGameActive) {
+			interval = setInterval(() => {
+				gameStepCicle();
+			}, 1000);
+		} else if (!isGameActive) {
+			clearInterval(interval);
+		}
+		return () => clearInterval(interval);
+	}, [isGameActive, generationCounter]);
+
+	const stepForward = () => {
+		console.log('** Stepforward');
+		gameStepCicle();
 	};
 
 	//TODO: Check this part later, maybe a single method to update game configurations?
