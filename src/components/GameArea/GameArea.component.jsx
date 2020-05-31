@@ -1,12 +1,12 @@
 import React, { useState, useEffect  } from 'react';
 import * as Styles from './GameArea.Style.jsx';
 
+import { gameLogic } from '../../lib/gameLogic';
+
 import { StartBar } from '../StartBar';
 import { Grid } from '../Grid';
 
 function GameArea() {
-	const arrayOfElements = [false, false, false, false, true, true, false, false, false, false];
-	/*** */
 	const smallGrid = 10;
 	const mediumGrid = 20;
 	const largeGrid = 40;
@@ -41,13 +41,43 @@ function GameArea() {
 		setGameConfigurations(newConfiguration);
 	};
 
+	const startGame = () => {
+		console.log('** Start');
+		gameLogic();
+	};
+
+	const pauseGame = () => {
+		console.log('** Pause');
+	};
+
+	const stepForward = () => {
+		console.log('** Stepforward');
+	};
+
+	//TODO: Check this part later, maybe a single method to update game configurations?
+	const setSpeed = (value) => {
+		let newConfiguration = {};
+		newConfiguration = Object.assign(newConfiguration, gameConfigurations);
+		newConfiguration.speed = value;
+		setGameConfigurations(newConfiguration);
+	};
+
 	return (
 		<Styles.Main>
 			<Styles.BarContainer>
 				<Styles.CounterText> 
                     generation: {generationCounter}
 				</Styles.CounterText>
-				<StartBar />
+				<StartBar 
+					buttonHandlers={{
+						start: startGame,
+						pause: pauseGame,
+						stepF: stepForward,
+						reset: emptyCellArray,
+						speedValue: gameConfigurations.speed,
+						speedHandler: setSpeed,
+					}}
+				/>
 			</Styles.BarContainer>
 
 			<Grid 
@@ -57,9 +87,7 @@ function GameArea() {
 			/>
 			
 			<Styles.BarContainer>
-				<Styles.CounterText> 
-                    generation: {generationCounter}
-				</Styles.CounterText>
+				<Styles.CounterText />
 				<Styles.ButtonStyled
 					isActive={gameConfigurations.gridSize === smallGrid ? true : false}
 					onClick={() => updateGridSize(smallGrid)}
