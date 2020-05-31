@@ -1,9 +1,14 @@
 import styled from 'styled-components';
 
 const Grid = styled.div `
-    display: flex;
+    /* display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: wrap; */
+    --colNumber: ${props => props.colNumber};
+    display: grid;
+    grid-template-columns: repeat(var(--colNumber), 1fr);
+    column-gap: 1px;
+    row-gap: 1px;
     width: 35vw;
     height: 35vw;
     background-color: lightsalmon;
@@ -15,12 +20,8 @@ const Grid = styled.div `
 `;
 
 const Cell = styled.div `
-    --size: ${props => props.size};
     --color: ${props => props.colorStatus ? 'DodgerBlue' : 'white'};
     background-color: var(--color);
-    width: calc((35vw / var(--size)) - 1px);
-    height: calc((35vw / var(--size)) - 1px);
-    margin: .5px;
     border: none;
 
     :hover {

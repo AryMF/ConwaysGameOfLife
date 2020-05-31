@@ -116,24 +116,26 @@ function GameArea() {
 			
 			<Styles.BarContainer>
 				<Styles.CounterText />
-				<Styles.ButtonStyled
-					isActive={gameConfigurations.gridSize === smallGrid ? true : false}
-					onClick={() => updateGridSize(smallGrid)}
-				>
-					SMALL
-				</Styles.ButtonStyled>
-				<Styles.ButtonStyled
-					isActive={gameConfigurations.gridSize === mediumGrid ? true : false}
-					onClick={() => updateGridSize(mediumGrid)}
-				>
-					MEDIUM
-				</Styles.ButtonStyled>
-				<Styles.ButtonStyled
-					isActive={gameConfigurations.gridSize === largeGrid ? true : false}
-					onClick={() => updateGridSize(largeGrid)}
-				>
-					LARGE
-				</Styles.ButtonStyled>
+				<div>
+					<Styles.ButtonStyled
+						isActive={gameConfigurations.gridSize === smallGrid ? true : false}
+						onClick={() => updateGridSize(smallGrid)}
+					>
+						SMALL
+					</Styles.ButtonStyled>
+					<Styles.ButtonStyled
+						isActive={gameConfigurations.gridSize === mediumGrid ? true : false}
+						onClick={() => updateGridSize(mediumGrid)}
+					>
+						MEDIUM
+					</Styles.ButtonStyled>
+					<Styles.ButtonStyled
+						isActive={gameConfigurations.gridSize === largeGrid ? true : false}
+						onClick={() => updateGridSize(largeGrid)}
+					>
+						LARGE
+					</Styles.ButtonStyled>
+				</div>
 			</Styles.BarContainer>
 		</Styles.Main>
 	);    

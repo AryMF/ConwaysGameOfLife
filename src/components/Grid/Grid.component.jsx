@@ -10,12 +10,12 @@ function Grid({arrayOfElements, gameConfigurations, updateCellStatus}) {
 				colorStatus={element}
 				size={gridSize}
 				onClick={() => updateCellStatus(rowIndex, colIndex)}
-		> {rowIndex + ',' + colIndex}</Styles.Cell>;
+			/>;
 		});
 	});
 
 	return (
-		<Styles.Grid>
+		<Styles.Grid colNumber={gridSize}>
 			{ cellsToDraw }
 		</Styles.Grid>
 	);
