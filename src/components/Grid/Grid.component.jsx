@@ -5,12 +5,12 @@ function Grid({arrayOfElements, gameConfigurations, updateCellStatus}) {
 	const { gridSize } = gameConfigurations;
 	const cellsToDraw = arrayOfElements.map((element, rowIndex) => {
 		return element.map((element, colIndex) => {
-			return <Styles.CellPlaceholder
+			return <Styles.Cell
 				key={ rowIndex + ',' + colIndex}
 				colorStatus={element}
 				size={gridSize}
 				onClick={() => updateCellStatus(rowIndex, colIndex)}
-			/>;
+		> {rowIndex + ',' + colIndex}</Styles.Cell>;
 		});
 	});
 

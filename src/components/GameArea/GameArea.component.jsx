@@ -11,7 +11,7 @@ function GameArea() {
 	const mediumGrid = 20;
 	const largeGrid = 40;
 	const [isGameActive, setIsGameActive] = useState(false);
-	const [gameConfigurations, setGameConfigurations] = useState({ gridSize: mediumGrid, seed: null, speed: 1});
+	const [gameConfigurations, setGameConfigurations] = useState({ gridSize: smallGrid, seed: null, speed: 1});
 	const [generationCounter, setGenerationCounter] = useState(0);
 	const [cellArray, setCellArray] = useState([]);
 
@@ -26,32 +26,40 @@ function GameArea() {
 		emptyCellArray();
 	}, [gameConfigurations.gridSize]);
 
-	const updateCellStatus = (row, col) => {
+	const updateCellStatus = (row, col) => {		
 		if(!isGameActive) {
-			const tempArray = [...cellArray];
+			// const tempArray = [...cellArray];
+			const tempArray = JSON.parse(JSON.stringify(cellArray));
 			tempArray[row][col] = !tempArray[row][col];
 			setCellArray(tempArray);
 		}
 	};
 
 	const updateGridSize = (size) => {
-		let newConfiguration = {};
-		newConfiguration = Object.assign(newConfiguration, gameConfigurations);
-		newConfiguration.gridSize = size;
-		setGameConfigurations(newConfiguration);
+		if(!isGameActive) { //TODO: Not sure about this, maybe let it happen even if the game is active.
+			let newConfiguration = {};
+			newConfiguration = Object.assign(newConfiguration, gameConfigurations);
+			newConfiguration.gridSize = size;
+			setGameConfigurations(newConfiguration);
+		}
 	};
 
 	const startGame = () => {
 		console.log('** Start');
-		gameLogic();
+		setIsGameActive(true);
+		//gameLogic();
 	};
 
 	const pauseGame = () => {
+		setIsGameActive(false);
 		console.log('** Pause');
 	};
 
 	const stepForward = () => {
 		console.log('** Stepforward');
+		const actualStateArray = JSON.parse(JSON.stringify(cellArray));
+		const newStateArray = gameLogic(actualStateArray);
+		setCellArray(newStateArray);
 	};
 
 	//TODO: Check this part later, maybe a single method to update game configurations?
@@ -60,6 +68,7 @@ function GameArea() {
 		newConfiguration = Object.assign(newConfiguration, gameConfigurations);
 		newConfiguration.speed = value;
 		setGameConfigurations(newConfiguration);
+		// console.log(gameConfigurations.speed);
 	};
 
 	return (

@@ -14,7 +14,7 @@ const Grid = styled.div `
     }
 `;
 
-const CellPlaceholder = styled.div `
+const Cell = styled.div `
     --size: ${props => props.size};
     --color: ${props => props.colorStatus ? 'DodgerBlue' : 'white'};
     background-color: var(--color);
@@ -33,4 +33,4 @@ const CellPlaceholder = styled.div `
     }
 `;
 
-export { Grid, CellPlaceholder };
+export { Grid, Cell };
