@@ -14,6 +14,7 @@ const BarContainer = styled.div `
     display: flex;
     justify-content: flex-end;
     flex-direction: row;
+    align-items: center;
     width: 40vw;
     min-width: fit-content;
     margin: 5px;
@@ -55,4 +56,18 @@ const GridPlaceholder = styled.div `
     }
 `;
 
-export { Main, BarContainer, StartBarPlaceHolder, CounterText, GridPlaceholder };
+const ButtonStyled = styled.button `
+    width: 75px;
+    height: 25px;
+    border-radius: 15px;
+    border: none;
+    background-color: ${props => props.isActive ? '#C76205' : '#0C4552'};
+    color: white;
+    margin: 0px 5px;
+
+    :hover {
+        background-color: #0D6072;
+    }
+`;
+
+export { Main, BarContainer, CounterText, ButtonStyled, StartBarPlaceHolder, GridPlaceholder };

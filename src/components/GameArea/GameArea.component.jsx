@@ -20,7 +20,6 @@ function GameArea() {
 		const size = gameConfigurations.gridSize;
 		const auxArray = new Array(size).fill().map(()=>Array(size).fill(false));
 		setCellArray(auxArray);
-		console.log('hola ', auxArray);
 	};
 
 	useEffect(() => {
@@ -33,6 +32,13 @@ function GameArea() {
 			tempArray[row][col] = !tempArray[row][col];
 			setCellArray(tempArray);
 		}
+	};
+
+	const updateGridSize = (size) => {
+		let newConfiguration = {};
+		newConfiguration = Object.assign(newConfiguration, gameConfigurations);
+		newConfiguration.gridSize = size;
+		setGameConfigurations(newConfiguration);
 	};
 
 	return (
@@ -54,7 +60,24 @@ function GameArea() {
 				<Styles.CounterText> 
                     generation: {generationCounter}
 				</Styles.CounterText>
-				<Styles.StartBarPlaceHolder />
+				<Styles.ButtonStyled
+					isActive={gameConfigurations.gridSize === smallGrid ? true : false}
+					onClick={() => updateGridSize(smallGrid)}
+				>
+					SMALL
+				</Styles.ButtonStyled>
+				<Styles.ButtonStyled
+					isActive={gameConfigurations.gridSize === mediumGrid ? true : false}
+					onClick={() => updateGridSize(mediumGrid)}
+				>
+					MEDIUM
+				</Styles.ButtonStyled>
+				<Styles.ButtonStyled
+					isActive={gameConfigurations.gridSize === largeGrid ? true : false}
+					onClick={() => updateGridSize(largeGrid)}
+				>
+					LARGE
+				</Styles.ButtonStyled>
 			</Styles.BarContainer>
 		</Styles.Main>
 	);    
