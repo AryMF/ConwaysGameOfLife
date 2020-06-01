@@ -5,7 +5,7 @@ const Main = styled.main `
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: lightcoral;
+    background-color: transparent;
     width: 100vw;
     height: calc((100vh / 7) * 6);
 `;
@@ -18,7 +18,7 @@ const BarContainer = styled.div `
     width: 40vw;
     min-width: fit-content;
     margin: 5px;
-    background-color: white;
+    background-color: transparent;
 
     @media (max-width: 768px) {
         flex-direction: column-reverse;
@@ -35,34 +35,13 @@ const CounterText = styled.p `
     margin: 5px;
 `;
 
-const StartBarPlaceHolder = styled.div `
-    display: flex;
-    flex-direction: row;
-    width: 260px;
-    min-width: 260px;
-    height: 40px;
-    background-color: gray;
-    border-radius: 20px;
-`;
-
-const GridPlaceholder = styled.div `
-    width: 35vw;
-    height: 35vw;
-    background-color: lightsalmon;
-
-    @media (max-width: 768px) {
-        width: 90vw;
-        height: 90vw;
-    }
-`;
-
 const ButtonStyled = styled.button `
     width: 75px;
     height: 25px;
     border-radius: 15px;
     border: none;
-    background-color: ${props => props.isActive ? '#C76205' : '#0C4552'};
-    color: white;
+    background-color: ${props => props.isActive ? props.theme.buttonActive : props.theme.buttonNormal};
+    color: ${props => props.theme.buttonFontColor};
     margin: 0px 5px;
 
     :hover {
@@ -70,4 +49,4 @@ const ButtonStyled = styled.button `
     }
 `;
 
-export { Main, BarContainer, CounterText, ButtonStyled, StartBarPlaceHolder, GridPlaceholder };
+export { Main, BarContainer, CounterText, ButtonStyled};

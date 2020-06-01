@@ -11,7 +11,7 @@ const Grid = styled.div `
     row-gap: 1px;
     width: 35vw;
     height: 35vw;
-    background-color: lightsalmon;
+    background-color: ${props => props.theme.gridBackground};
 
     @media (max-width: 768px) {
         width: 90vw;
@@ -20,7 +20,8 @@ const Grid = styled.div `
 `;
 
 const Cell = styled.div `
-    --color: ${props => props.colorStatus ? 'DodgerBlue' : 'white'};
+    /* props.theme.cellActive */
+    --color: ${props => props.colorStatus ? props.theme.gridBackground : props.theme.cellInactive};
     background-color: var(--color);
     border: none;
 

@@ -6,17 +6,17 @@ import { ReactComponent as ReactLogo } from '../assets/logoSVG.svg';
 
 const GlobalStyle =  createGlobalStyle`
     body {
-        background: transparent;
+        background: ${props => props.theme.background};
         font-family: 'Text Me One', sans-serif;
         font-weight: normal;
         font-size: 20px;
-        color: black;
+        color: ${props => props.theme.bodyFontColor};
     }
 
     header {
         display: flex;
         align-items: center;
-        background-color: gray;
+        background-color: transparent;
         width: 100vw;
         height: calc(100vh / 7);
 

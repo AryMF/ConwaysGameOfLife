@@ -1,4 +1,6 @@
 import { GlobalStyle, LogoSVG } from './GlobalStyle.jsx';
-import { old, light } from './theme.js';
+import { Fresh } from './theme.js';
 
-export { GlobalStyle, LogoSVG };
+const Theme = {Fresh};
+
+export { GlobalStyle, LogoSVG, Theme };

@@ -8,15 +8,14 @@ const StartBar = styled.div `
     align-items: center;
     width: 260px;
     min-width: 260px;
-    height: 40px;
+    height: 30px;
     padding: 0px 3px;
-    background-color: orangered;
+    background-color: ${props => props.theme.buttonNormal};
     border-radius: 20px;
 `;
 
 const StyledIcon = styled(FontAwesomeIcon) `
-    color: white;
-
+    color: ${props => props.theme.iconsColor};
     :hover {
         color: black;
     }
