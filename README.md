@@ -17,3 +17,8 @@ Used technologies: React JS.
 ### Simple component analysis
 ![alt text](https://raw.githubusercontent.com/AryMF/ConwaysGameOfLife/master/src/assets/readme_IMG/ComponentAnalysis.png "Component Analysis")
 
+### Final product
+![alt text](https://raw.githubusercontent.com/AryMF/ConwaysGameOfLife/master/src/assets/readme_IMG/FinalMobileVer.PNG "Mobile version")
+
+![alt text](https://raw.githubusercontent.com/AryMF/ConwaysGameOfLife/master/src/assets/readme_IMG/FinalDesktopVer.PNG "Mobile version")
+
