@@ -20,8 +20,7 @@ const Grid = styled.div `
 `;
 
 const Cell = styled.div `
-    /* props.theme.cellActive */
-    --color: ${props => props.colorStatus ? props.theme.gridBackground : props.theme.cellInactive};
+    --color: ${props => props.colorStatus ? props.theme.cellActive : props.theme.cellInactive};
     background-color: var(--color);
     border: none;
 

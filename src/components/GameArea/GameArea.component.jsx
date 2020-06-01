@@ -6,7 +6,7 @@ import { gameLogic } from '../../lib/gameLogic';
 import { StartBar } from '../StartBar';
 import { Grid } from '../Grid';
 
-function GameArea() {
+function GameArea({ changeTheme, selectedTheme }) {
 	const smallGrid = 10;
 	const mediumGrid = 20;
 	const largeGrid = 40;
@@ -104,6 +104,8 @@ function GameArea() {
 						reset: emptyCellArray,
 						speedValue: gameConfigurations.speed,
 						speedHandler: setSpeed,
+						setTheme: changeTheme,
+						selectedTheme,
 					}}
 				/>
 			</Styles.BarContainer>

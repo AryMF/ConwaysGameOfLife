@@ -6,7 +6,7 @@ const StartBar = styled.div `
     flex-direction: row;
     justify-content: space-around;
     align-items: center;
-    width: 260px;
+    width: 310px;
     min-width: 260px;
     height: 30px;
     padding: 0px 3px;
@@ -21,4 +21,8 @@ const StyledIcon = styled(FontAwesomeIcon) `
     }
 `;
 
-export { StartBar, StyledIcon };
+const StyledText = styled.p `
+    color: ${props => props.theme.iconsColor};
+`;
+
+export { StartBar, StyledIcon, StyledText };

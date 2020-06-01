@@ -1,6 +1,6 @@
 import { GlobalStyle, LogoSVG } from './GlobalStyle.jsx';
-import { Fresh } from './theme.js';
+import { Fresh, Earth, Winter, Boho, Retro } from './theme.js';
 
-const Theme = {Fresh};
+const Theme = {Fresh, Earth, Winter, Boho, Retro};
 
 export { GlobalStyle, LogoSVG, Theme };
