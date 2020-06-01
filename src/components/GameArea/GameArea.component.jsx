@@ -15,6 +15,13 @@ function GameArea({ changeTheme, selectedTheme }) {
 	const [generationCounter, setGenerationCounter] = useState(0);
 	const [cellArray, setCellArray] = useState([]);
 
+	const updateGameConfiguration = (key, value) => {
+		let newConfiguration = {};
+		newConfiguration = Object.assign(newConfiguration, gameConfigurations);
+		newConfiguration[key] = value;
+		setGameConfigurations(newConfiguration);
+	};
+
 	const emptyCellArray = () => {
 		const size = gameConfigurations.gridSize;
 		const auxArray = new Array(size).fill().map(()=>Array(size).fill(false));
@@ -37,10 +44,7 @@ function GameArea({ changeTheme, selectedTheme }) {
 
 	const updateGridSize = (size) => {
 		if(!isGameActive) {
-			let newConfiguration = {};
-			newConfiguration = Object.assign(newConfiguration, gameConfigurations);
-			newConfiguration.gridSize = size;
-			setGameConfigurations(newConfiguration);
+			updateGameConfiguration('gridSize', size);
 		}
 	};
 
@@ -75,12 +79,8 @@ function GameArea({ changeTheme, selectedTheme }) {
 		gameStepCicle();
 	};
 
-	//TODO: Check this part later, maybe a single method to update game configurations?
 	const setSpeed = (value) => {
-		let newConfiguration = {};
-		newConfiguration = Object.assign(newConfiguration, gameConfigurations);
-		newConfiguration.speed = value;
-		setGameConfigurations(newConfiguration);
+		updateGameConfiguration('speed', value);
 	};
 
 	return (
