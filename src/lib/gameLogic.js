@@ -1,12 +1,13 @@
 const gameLogic = (actualStatusArray) => {
-	//Crear un nuevo array (newStatusArray) para guardar los nuevos estados en el.
+	//Create a new array (newStatusArray) to store the new state of cells
 	let newStatusArray = JSON.parse(JSON.stringify(actualStatusArray));
-	// Barrido al array actual, evaluar cada cell llamando el metodo checkCellNeighboursStatus
+	// Go through actualStatusArray and evaluate each cell with the auxiliary method checkCellNeighboursStatus
 	for(let i=0; i < actualStatusArray.length; i++){
 		for(let j=0; j < actualStatusArray[i].length; j++){
 			const neighboursAlive = checkCellNeighboursStatus(actualStatusArray, i, j);
 			// con el resultado de esa funcion determinar si la celula vive, muere o se reproduce y guardar
 			// su nuevo status en newStatusArray.
+			// With the result obtained determine if the cell lives or dies, and save the new status on newStatusArray
 			newStatusArray[i][j] = false;
 			if(actualStatusArray[i][j] && (neighboursAlive === 2 || neighboursAlive === 3)){
 				newStatusArray[i][j] = true;
@@ -15,7 +16,7 @@ const gameLogic = (actualStatusArray) => {
 			}
 		}
 	}	
-	// Al finalizar el barrido del array actual retornar newStatusArray.
+	// Return the result stored at newStatusArray.
 	return newStatusArray;
 };
 

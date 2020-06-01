@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 
 const Grid = styled.div `
-    /* display: flex;
-    flex-direction: row;
-    flex-wrap: wrap; */
     --colNumber: ${props => props.colNumber};
     display: grid;
     grid-template-columns: repeat(var(--colNumber), 1fr);

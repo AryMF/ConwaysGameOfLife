@@ -16,7 +16,6 @@ function GameArea({ changeTheme, selectedTheme }) {
 	const [cellArray, setCellArray] = useState([]);
 
 	const emptyCellArray = () => {
-		console.log('emptyCellArray entro en efecto ');
 		const size = gameConfigurations.gridSize;
 		const auxArray = new Array(size).fill().map(()=>Array(size).fill(false));
 		setCellArray(auxArray);
@@ -30,7 +29,6 @@ function GameArea({ changeTheme, selectedTheme }) {
 
 	const updateCellStatus = (row, col) => {		
 		if(!isGameActive) {
-			// const tempArray = [...cellArray];
 			const tempArray = JSON.parse(JSON.stringify(cellArray));
 			tempArray[row][col] = !tempArray[row][col];
 			setCellArray(tempArray);
@@ -38,7 +36,7 @@ function GameArea({ changeTheme, selectedTheme }) {
 	};
 
 	const updateGridSize = (size) => {
-		if(!isGameActive) { //TODO: Not sure about this, maybe let it happen even if the game is active.
+		if(!isGameActive) {
 			let newConfiguration = {};
 			newConfiguration = Object.assign(newConfiguration, gameConfigurations);
 			newConfiguration.gridSize = size;
@@ -47,14 +45,11 @@ function GameArea({ changeTheme, selectedTheme }) {
 	};
 
 	const startGame = () => {
-		console.log('** Start');
 		setIsGameActive(true);
-		//gameLogic();
 	};
 
 	const pauseGame = () => {
 		setIsGameActive(false);
-		console.log('** Pause');
 	};
 
 	const gameStepCicle = () => {
@@ -77,7 +72,6 @@ function GameArea({ changeTheme, selectedTheme }) {
 	}, [isGameActive, generationCounter]);
 
 	const stepForward = () => {
-		console.log('** Stepforward');
 		gameStepCicle();
 	};
 
@@ -87,7 +81,6 @@ function GameArea({ changeTheme, selectedTheme }) {
 		newConfiguration = Object.assign(newConfiguration, gameConfigurations);
 		newConfiguration.speed = value;
 		setGameConfigurations(newConfiguration);
-		// console.log(gameConfigurations.speed);
 	};
 
 	return (
