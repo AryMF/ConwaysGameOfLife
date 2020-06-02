@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import * as Styles from './styles';
 
@@ -19,6 +19,11 @@ function App() {
 		const newTheme = themeIndex < 4 ? themeIndex + 1 : 0;
 		setThemeIndex(newTheme);
 	};
+
+	useEffect(() => {
+		console.info('%cMade by Ary\n%cYou can find the code at:', 'color: blue; font-size:24px;', 'color: palevioletred; font-size:18px;');
+		console.log('https://github.com/AryMF/ConwaysGameOfLife');
+	}, []);
 
 	return (
 		<ThemeProvider theme={themes[themeIndex]}>
