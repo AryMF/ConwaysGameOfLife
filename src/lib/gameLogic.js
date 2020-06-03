@@ -1,49 +1,66 @@
-const gameLogic = (actualStatusArray) => {
-	//Create a new array (newStatusArray) to store the new state of cells
-	let newStatusArray = JSON.parse(JSON.stringify(actualStatusArray));
-	// Go through actualStatusArray and evaluate each cell with the auxiliary method checkCellNeighboursStatus
-	for(let i=0; i < actualStatusArray.length; i++){
-		for(let j=0; j < actualStatusArray[i].length; j++){
-			const neighboursAlive = checkCellNeighboursStatus(actualStatusArray, i, j);
-			// con el resultado de esa funcion determinar si la celula vive, muere o se reproduce y guardar
-			// su nuevo status en newStatusArray.
-			// With the result obtained determine if the cell lives or dies, and save the new status on newStatusArray
-			newStatusArray[i][j] = false;
-			if(actualStatusArray[i][j] && (neighboursAlive === 2 || neighboursAlive === 3)){
-				newStatusArray[i][j] = true;
-			} else if(!actualStatusArray[i][j] && neighboursAlive === 3){
-				newStatusArray[i][j] = true;
-			}
-		}
-	}	
-	// Return the result stored at newStatusArray.
+const data = [ false, false, false, true, true, true, false, false, false, ];
+// [ false, true, false, false, true, false, false, true, false, ]
+
+const gameLogic = (actualStatusArray, gridSize) => {
+	const newStatusArray = actualStatusArray.map((element, index) => {
+		return evaluateCell(actualStatusArray, gridSize, index);
+	});
 	return newStatusArray;
 };
 
-const checkCellNeighboursStatus = (actualArray, row, col) => {
-	let liveNeighbours = 0;
-	let rowArray =[];
-	rowArray.push(row - 1 >= 0 ? row - 1 : -1);
-	rowArray.push(row);
-	rowArray.push(row + 1 < actualArray.length ? row + 1 : -1);
-	let colArray =[];
-	colArray.push(col - 1 >= 0 ? col - 1 : -1);
-	colArray.push(col);
-	colArray.push(col + 1 < actualArray[row].length ? col + 1 : -1);
-	
 
-	for(let i=0; i < rowArray.length; i++) {
-		if(rowArray[i] > -1){
-			for(let j=0; j < colArray.length; j++){
-				if(colArray[j] > -1 && !(row === rowArray[i] && col === colArray[j])){
-					if(actualArray[rowArray[i]][colArray[j]]){
-						liveNeighbours++;
-					}
-				}
-			}
-		}
-	}
+const evaluateCell = (actualStatusArray, gridSize, position) => {
+	const cellStatus = actualStatusArray[position];
+	let mySet = new Set([2, 3]); //TODO: Change this variable name for a better one.
+	
+	const neighboursAlive = checkCellNeighboursStatus(actualStatusArray, position, gridSize);
+
+	const passToNextGeneration = cellStatus && mySet.has(neighboursAlive);
+	const newCellBorn = !cellStatus && neighboursAlive == 3;
+	
+	return passToNextGeneration || newCellBorn;
+};
+
+const checkCellNeighboursStatus = (actualArray, position, gridSize) => {
+	let liveNeighbours = 0;
+
+	const row = Math.trunc(position / gridSize);
+	const col = Math.trunc(position - (row * gridSize)) ;
+	
+	const oneUp = row - 1 > -1;
+	const oneDown = row + 1 <  gridSize;
+	const oneLeft = col - 1 > -1;
+	const oneRight = col + 1 <  gridSize;
+
+	liveNeighbours = oneUp && oneLeft && actualArray[(position - gridSize - 1)] ? liveNeighbours + 1 : liveNeighbours;
+	liveNeighbours = oneUp && actualArray[(position - gridSize)] ? liveNeighbours + 1 : liveNeighbours;
+	liveNeighbours = oneUp && oneRight && actualArray[(position - gridSize + 1)] ? liveNeighbours + 1 : liveNeighbours;
+
+	liveNeighbours = oneLeft && actualArray[(position - 1)] ? liveNeighbours + 1 : liveNeighbours;
+	liveNeighbours = oneRight && actualArray[(position + 1)] ? liveNeighbours + 1 : liveNeighbours;
+
+	liveNeighbours = oneDown && oneLeft && actualArray[(position + gridSize - 1)] ? liveNeighbours + 1 : liveNeighbours;	
+	liveNeighbours = oneDown && actualArray[(position + gridSize)] ? liveNeighbours + 1 : liveNeighbours;
+	liveNeighbours = oneDown && oneRight && actualArray[(position + gridSize + 1)] ? liveNeighbours + 1 : liveNeighbours;
+
 	return liveNeighbours;
 };
 
 export { gameLogic };
+
+/*
+// Recursive method approach
+const gameLogic = (actualStatusArray, gridSize, position = actualStatusArray.length - 1) => {
+	let newStatusArray = [];
+	if (position != 0) {
+		newStatusArray = newStatusArray.concat(gameLogic(actualStatusArray, position - 1, gridSize));
+		newStatusArray.push(evaluateCell(actualStatusArray, position, gridSize));
+		return newStatusArray;
+	} else {
+		newStatusArray.push(evaluateCell(actualStatusArray, position, gridSize));
+		return newStatusArray;
+	}
+};
+
+console.log(gameLogic(data, 3,  data.length - 1));
+*/

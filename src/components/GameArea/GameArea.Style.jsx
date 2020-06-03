@@ -35,8 +35,20 @@ const CounterText = styled.p `
     margin: 5px;
 `;
 
+const SeedDiv = styled.div `  
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    @media (max-width: 768px) {
+        margin-top: 10px;
+    }
+`;
+
 const ButtonStyled = styled.button `
-    width: 75px;
+    --widthSize: ${props => props.width ? props.width : '75px'};
+    width: var(--widthSize);
     height: 25px;
     border-radius: 15px;
     border: none;
@@ -49,4 +61,4 @@ const ButtonStyled = styled.button `
     }
 `;
 
-export { Main, BarContainer, CounterText, ButtonStyled};
+export { Main, BarContainer, CounterText, ButtonStyled, SeedDiv};

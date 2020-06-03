@@ -17,7 +17,13 @@ const StartBar = styled.div `
 const StyledIcon = styled(FontAwesomeIcon) `
     color: ${props => props.theme.iconsColor};
     :hover {
-        color: black;
+        color: ${props => props.theme.buttonHover};
+    }
+
+    @media (max-width: 768px) {
+        :hover, :focus {
+            color: ${props => props.theme.iconsColor};
+        }
     }
 `;
 

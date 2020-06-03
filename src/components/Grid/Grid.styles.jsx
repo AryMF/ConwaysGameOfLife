@@ -28,6 +28,10 @@ const Cell = styled.div `
     @media (max-width: 768px) {
         width: calc((90vw / var(--size)) - 2px);
         height: calc((90vw / var(--size)) - 4px);
+
+        :hover, :focus {
+            background-color: var(--color);
+        }
     }
 `;
 

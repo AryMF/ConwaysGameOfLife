@@ -2,6 +2,7 @@ import React, { useState, useEffect  } from 'react';
 import * as Styles from './GameArea.Style.jsx';
 
 import { gameLogic } from '../../lib/gameLogic';
+import { seedPattern } from '../../lib/seedsPattern';
 
 import { StartBar } from '../StartBar';
 import { Grid } from '../Grid';
@@ -23,8 +24,8 @@ function GameArea({ changeTheme, selectedTheme }) {
 	};
 
 	const emptyCellArray = () => {
-		const size = gameConfigurations.gridSize;
-		const auxArray = new Array(size).fill().map(()=>Array(size).fill(false));
+		const size = gameConfigurations.gridSize * gameConfigurations.gridSize;
+		const auxArray = new Array(size).fill(false);
 		setCellArray(auxArray);
 		setIsGameActive(false);
 		setGenerationCounter(0);
@@ -34,12 +35,15 @@ function GameArea({ changeTheme, selectedTheme }) {
 		emptyCellArray();
 	}, [gameConfigurations.gridSize]);
 
-	const updateCellStatus = (row, col) => {		
-		if(!isGameActive) {
-			const tempArray = JSON.parse(JSON.stringify(cellArray));
-			tempArray[row][col] = !tempArray[row][col];
-			setCellArray(tempArray);
-		}
+	const updateCellStatus = (index) => {
+		const tempArray = JSON.parse(JSON.stringify(cellArray));
+		let flag = isGameActive;
+		isGameActive && setIsGameActive(false);
+		tempArray[index] = !tempArray[index];
+		setCellArray(tempArray);
+		setTimeout(() => {
+			flag && setIsGameActive(true);
+		}, 0);
 	};
 
 	const updateGridSize = (size) => {
@@ -58,7 +62,7 @@ function GameArea({ changeTheme, selectedTheme }) {
 
 	const gameStepCicle = () => {
 		const actualStateArray = JSON.parse(JSON.stringify(cellArray));
-		const newStateArray = gameLogic(actualStateArray);
+		const newStateArray = gameLogic(actualStateArray, gameConfigurations.gridSize);
 		setCellArray(newStateArray);
 		setGenerationCounter(generationCounter => generationCounter + 1);
 	};
@@ -81,6 +85,18 @@ function GameArea({ changeTheme, selectedTheme }) {
 
 	const setSpeed = (value) => {
 		updateGameConfiguration('speed', value);
+	};
+
+	useEffect(() => {
+		emptyCellArray();
+		console.log(seedPattern[gameConfigurations.seed]);
+	}, [gameConfigurations.seed]);
+
+	const setSeed = () => {
+		if(!isGameActive) {
+			const newSeed = gameConfigurations.seed < 2 ? gameConfigurations.seed + 1 : 1;
+			updateGameConfiguration('seed', newSeed);
+		}
 	};
 
 	return (
@@ -110,7 +126,15 @@ function GameArea({ changeTheme, selectedTheme }) {
 			/>
 			
 			<Styles.BarContainer>
-				<Styles.CounterText />
+				<Styles.SeedDiv>
+					<Styles.ButtonStyled
+						isActive={false}
+						width={'130px'}
+						onClick={() => setSeed()}
+					>
+						RANDOM SEED
+					</Styles.ButtonStyled>
+				</Styles.SeedDiv>
 				<div>
 					<Styles.ButtonStyled
 						isActive={gameConfigurations.gridSize === smallGrid ? true : false}
